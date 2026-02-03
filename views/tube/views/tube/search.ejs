@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title><%= query %> - 検索</title>
+  <link rel="stylesheet" href="/css/search.css">
+</head>
+
+<body>
+
+<header class="ytd-masthead">
+  <div class="start">
+    <a href="/" class="logo">仙人Tube</a>
+  </div>
+  <div class="center">
+    <form action="/s">
+      <input type="text" name="q" value="<%= query %>">
+    </form>
+  </div>
+</header>
+
+<div id="page-manager">
+  <main class="ytd-search">
+
+    <% res.items.forEach(v => { %>
+      <div class="ytd-video-renderer">
+
+        <div class="thumbnail">
+          <a href="/watch/<%= v.id %>">
+            <img src="<%= v.bestThumbnail.url %>">
+            <span class="duration"><%= v.duration %></span>
+          </a>
+        </div>
+
+        <div class="meta">
+          <h3 class="title">
+            <a href="/watch/<%= v.id %>"><%= v.title %></a>
+          </h3>
+
+          <div class="stats">
+            <span><%= v.views %> 回視聴</span> • <%= v.uploadedAt %>
+          </div>
+
+          <div class="byline">
+            <a href="/c/<%= v.author.channelID %>"><%= v.author.name %></a>
+          </div>
+
+          <p class="description"><%= v.description %></p>
+        </div>
+
+      </div>
+    <% }) %>
+
+  </main>
+</div>
+
+</body>
+</html>
